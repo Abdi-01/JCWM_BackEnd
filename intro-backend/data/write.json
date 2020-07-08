@@ -1,18 +1,34 @@
-[
-    {
-        "nama": "Kurma",
-        "harga": 10000
-    },
-    {
-        "nama": "Semangka",
-        "harga": 5000
-    },
-    {
-        "nama": "Jeruk",
-        "harga": "4000"
-    },
-    {
-        "nama": "Jeruk",
-        "harga": "4000"
-    }
-]
+{
+    "product": [
+        {
+            "nama": "Kurma",
+            "harga": 10000
+        },
+        {
+            "nama": "Semangka",
+            "harga": 5000
+        },
+        {
+            "nama": "Jeruk",
+            "harga": "4000"
+        },
+        {
+            "nama": "Jeruk",
+            "harga": "4000"
+        },
+        {
+            "nama": "Naga",
+            "harga": 20000
+        },
+        {
+            "nama": "Buah Manggis",
+            "harga": 10000
+        }
+    ],
+    "user": [
+        {
+            "name": "user",
+            "pass": "user"
+        }
+    ]
+}
