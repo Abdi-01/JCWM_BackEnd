@@ -36,19 +36,17 @@ let tempData = JSON.parse(fs.readFileSync('./data/write.json').toString())  // m
 //route get, untuk menandai bahwa request yg diminta adalah GET data
 app.get('/', (req, res) => {
     //res : menandai response yg akan dikirim, status : menunjukkan status code dari response, dan send: menunjukkan data apa yg dikirim ke user
-    
     res.status(200).send('<h2>HaloExpress</h2>') //data yg dikirm berupa string dengan format html, jadi browser akan otomatis men-Generate menjadi HTML
 })
 
-app.get('/sepatu', (req, res) => {
+app.get('/getProductSepatu', (req, res) => {
     //JSON.parse(data yg dirubah): digunakan untuk merubah data string menjadi format JSON
     let productSepatu = JSON.parse(dbsepatu).products
-    //JSON.stringify(data yg dirubah): digunakan untuk merubah data JSON menjadi format JSON string sebelum ditulis ke file write.json
-    let newData = JSON.stringify(data)
-    //Menulis data ke file write.json
-    //Data yg ditulis ke file .json, harus diconvert dengan JSON.stringfy, agar setiap propertinya terbaca. Jika tidak hasilnya akan error 
-    fs.writeFileSync('./data/write.json', newData)
     res.status(200).send(productSepatu)
+})
+
+app.get('/getBuah', (req, res) => {
+    res.status(200).send(tempData.product)
 })
 
 app.get('/userTransaction', (req, res) => {
@@ -56,13 +54,17 @@ app.get('/userTransaction', (req, res) => {
     res.status(200).send(userTrans)
 })
 
-// app.get('/product', (req, res) => {
-
-// })
+app.get('/getUser', (req, res) => {
+    res.status(200).send(tempData.user)
+})
 
 app.post('/addProduct', (req, res) => {
     tempData.push(req.body)
+    //JSON.stringify(data yg dirubah): digunakan untuk merubah data JSON menjadi format JSON string sebelum ditulis ke file write.json
+    //fs.writeFileSync : Menulis data ke file write.json
+    //Data yg ditulis ke file .json, harus diconvert dengan JSON.stringfy, agar setiap propertinya terbaca. Jika tidak hasilnya akan error 
     fs.writeFileSync('./data/write.json', JSON.stringify(tempData))
+    //Setelah ditulis, data terbaru dikirim kembali ke user
     res.status(200).send(tempData)
 })
 
