@@ -1,0 +1,14 @@
+[
+    {
+        "nama":"Kurma",
+        "harga":10000
+    },
+    {
+        "nama":"Semangka",
+        "harga":5000
+    },
+    {
+        "nama":"Jeruk",
+        "harga":"4000"
+    }
+]
