@@ -34,15 +34,19 @@ let tempData = JSON.parse(fs.readFileSync('./data/write.json').toString())  // m
 
 //Parameter route GET,PUT,POST,PATCH dan DELETE dari expressJS pasti dua yaitu app.routenya(pathroute, cb(req,res)=>{})
 //route get, untuk menandai bahwa request yg diminta adalah GET data
-app.get('/', (req, res) => { 
+app.get('/', (req, res) => {
     //res : menandai response yg akan dikirim, status : menunjukkan status code dari response, dan send: menunjukkan data apa yg dikirim ke user
-    res.status(200).send('<h2>HaloExpress</h2>')
+    
+    res.status(200).send('<h2>HaloExpress</h2>') //data yg dikirm berupa string dengan format html, jadi browser akan otomatis men-Generate menjadi HTML
 })
 
 app.get('/sepatu', (req, res) => {
     //JSON.parse(data yg dirubah): digunakan untuk merubah data string menjadi format JSON
     let productSepatu = JSON.parse(dbsepatu).products
+    //JSON.stringify(data yg dirubah): digunakan untuk merubah data JSON menjadi format JSON string sebelum ditulis ke file write.json
     let newData = JSON.stringify(data)
+    //Menulis data ke file write.json
+    //Data yg ditulis ke file .json, harus diconvert dengan JSON.stringfy, agar setiap propertinya terbaca. Jika tidak hasilnya akan error 
     fs.writeFileSync('./data/write.json', newData)
     res.status(200).send(productSepatu)
 })
@@ -52,9 +56,9 @@ app.get('/userTransaction', (req, res) => {
     res.status(200).send(userTrans)
 })
 
-app.get('/product', (req, res) => {
+// app.get('/product', (req, res) => {
 
-})
+// })
 
 app.post('/addProduct', (req, res) => {
     tempData.push(req.body)
@@ -63,7 +67,8 @@ app.post('/addProduct', (req, res) => {
 })
 
 app.patch('/editProduct/:id', (req, res) => {
-    // tempData.product[req.params.id] = req.body
+    //Looping yg ditujukan untuk mencari kecocokan nama property yg akan di edit, sehingga dari USER cukup mengirim object sesuai nama property yg dituju.
+    // Jika nama property sama, maka data akan langsung diganti
     for (let prop in tempData.product[req.params.id]) {
         console.log("test1", tempData.product[req.params.id][prop])
         for (let bodyProp in req.body) {
