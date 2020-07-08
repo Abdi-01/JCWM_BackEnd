@@ -1,0 +1,24 @@
+- intro to backend=> relation => API vs FrontEnd vs Database, web server
+- REST API
+- http protocol
+- intro : asychronous proccess, callback fn, .then .cacth
+- create web server or API using HTTP module => node application
+  -- serving different file type : text/plain, text/hmtl, application/json
+  -- serving html from file => using file system module
+  -- routing
+  -- user handlelistener => callback fn
+  -- handle request from client => POST, PUT, PATCH, DELETE => stream and buffer data first
+  -- data console.log()
+NOTE : use nodemon and postman
+- create web serverng using express
+  -- handle request GET, POST, PACTH, PUT, DELETE
+  -- use simple database => variable
+  -- create express route => express router
+- Intro to SQL using MySQL : relational database
+  -- feature login or register
+- hirearcial database
+- connect SQL to Express
+- Upload file => multer
+- input validation => crypt pass => bycrypt and email validation (nodemailer)
+- User Authentication => jwt token
+- Express + MongoDB
