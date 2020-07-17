@@ -5,18 +5,31 @@ const URL = "http://localhost:2800"
 
 class Addproductpage extends React.Component {
     state = {
-        dataProduct: []
+        dataProduct: [],
+        value:''
     }
 
     componentDidMount() {
+    }
+
+    onBtGet = () => {
         Axios.get(URL + '/product/getProduct')
             .then((res) => {
-                this.setState({ dataProduct: res.data })
+                console.log('State1', this.state.dataProduct)
+                this.setState({ dataProduct: res.data }, () => console.log('State2A', this.state.dataProduct))
+                console.log('State2B', this.state.dataProduct)
+                console.log(this.state.dataProduct)
             })
             .catch((err) => {
                 console.log(err)
             })
+        console.log('Out', this.state.dataProduct)
+    }
 
+    inChange = () => {
+        let value = this.name.value
+        this.setState({value})
+        console.log("Value 2:", this.state.value)
     }
 
     onBtSubmit = () => {
@@ -36,7 +49,7 @@ class Addproductpage extends React.Component {
                     <Form>
                         <FormGroup>
                             <Label for="exampleText">Name</Label>
-                            <Input type="text" name="text" id="exampleText" innerRef={(text) => this.name = text} placeholder="with a placeholder" />
+                            <Input type="text" name="text" id="exampleText" innerRef={(text) => this.name = text} onChange={this.inChange} placeholder="with a placeholder" />
                         </FormGroup>
                         <FormGroup>
                             <Label for="exampleSelect">Category</Label>
@@ -59,7 +72,7 @@ class Addproductpage extends React.Component {
                             <Label for="exampleImage">Image Link</Label>
                             <Input type="text" name="text" id="exampleImage" innerRef={(text) => this.image = text} placeholder="with a placeholder" />
                         </FormGroup>
-                        <Button onClick={this.onBtSubmit}>Submit</Button>
+                        <Button onClick={this.onBtGet}>Submit</Button>
                     </Form>
                 </div>
                 <div style={{ width: '68%', margin: '1%' }}>
@@ -81,11 +94,11 @@ class Addproductpage extends React.Component {
                                     return (
                                         <tr>
                                             <th>{index + 1}</th>
-                                            <th style={{width:'10vw'}}><img src={item.image} alt="img" width="100%" /> </th>
+                                            <th style={{ width: '10vw' }}><img src={item.image} alt="img" width="100%" /> </th>
                                             <th>{item.name}</th>
                                             <th>{item.description}</th>
                                             <th>{item.category}</th>
-                                            <th>{item.price}</th>
+                                            <th>IDR. {item.price.toLocaleString()}</th>
                                             <th>Action</th>
                                         </tr>
                                     )
