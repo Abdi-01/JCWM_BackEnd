@@ -8,8 +8,9 @@ const PORT = 2800
 App.use(bodyParser())
 App.use(cors())
 
-const { productRouter } = require('./router')
+const { productRouter, userRouter } = require('./router')
 
 App.use('/product', productRouter)
+App.use('/user', userRouter)
 
 App.listen(PORT, () => console.log("RESTFull API CONNECTED :", PORT))
