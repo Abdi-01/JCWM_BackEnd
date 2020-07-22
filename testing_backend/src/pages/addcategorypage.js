@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Table } from 'reactstrap';
 import Axios from 'axios'
-const URL = "http://localhost:2800"
+// const URL = "http://localhost:2800"
 
 class Addcategorypage extends React.Component {
     state = {
@@ -9,13 +9,13 @@ class Addcategorypage extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get(URL + '/product/getCategory')
-            .then((res) => {
-                this.setState({ dataCategory: res.data })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        // Axios.get(URL + '/product/getCategory')
+        //     .then((res) => {
+        //         this.setState({ dataCategory: res.data })
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
 
     }
 

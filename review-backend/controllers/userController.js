@@ -9,7 +9,7 @@ module.exports = {
     //🟡 Fungsi get semua data users
     getUsers: (req, res) => {
         //🟡 Deklarasi perintah query MySQL Get
-        let sqlGet = `Select * from tb_users;`
+        let sqlGet = `SELECT * FROM tb_users u join tb_address a on u.id = a.userId ;`
 
         //🟡 Fungsi query dengan 2 parameter yaitu perintah query dan callback function
         db.query(sqlGet, (err, results) => {
@@ -38,8 +38,8 @@ module.exports = {
 
         //🟡 Deklarasi perintah query insert ke tb_users
         //🟡 db.escape(datanya apa) ==> berfungsi untuk mengidentifikasi secara otomatis apakah data pada query berupa STRING atau NUMBER
-        let sqlAdd = `Insert into tb_users (username,email,password) 
-        values (${db.escape(req.body.username)},${db.escape(req.body.email)},${db.escape(hashPassword)});`
+        let sqlAdd = `Insert into tb_users (username,email,password,phone,gender) 
+        values (${db.escape(req.body.name)},${db.escape(req.body.email)},${db.escape(hashPassword)},${db.escape(req.body.phone)},${db.escape(req.body.gender)});`
 
         //🟡 Validasi sederhana untuk pengecekan email, jika benar maka fungsi query di eksekusi
         if (req.body.email.includes('@')) {
@@ -47,9 +47,10 @@ module.exports = {
                 if (err) {
                     res.status(500).send(err)
                 }
-                //🟡 results.insertId didapat jika eksekusi query insert berhasil dilakukan
+                console.log(results)
+                // 🟡 results.insertId didapat jika eksekusi query insert berhasil dilakukan
                 if (results.insertId > 0) {
-                    let sqlAddress = `Insert into tb_address (userId) values (${db.escape(results.insertId)});`
+                    let sqlAddress = `Insert into tb_address (userId,address) values (${db.escape(results.insertId)},${db.escape(req.body.address)});`
                     db.query(sqlAddress, (errAddress, resultsAddress) => {
                         if (err) {
                             res.status(500).send(errAddress)
@@ -75,5 +76,6 @@ module.exports = {
             }
             res.status(200).send(results)
         })
-    }
+    },
+
 }
